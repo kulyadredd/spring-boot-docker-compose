@@ -1,0 +1,50 @@
+version: '3.7'
+
+volumes:
+  javaApp:
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test
+      - MYSQL_PASSWORD=root
+  javaApp:
+    image: kulyadredd/spring-boot-docker-compose:0.0.1
+    depends_on:
+      - mysql
+    ports:
+      - 8080:8080
+    volumes:
+      - javaApp:/log
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+    ports:
+      - 9200:9200
+    environment:
+      - "xpack.security.enabled=false"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    depends_on:
+      - javaApp
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.0
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.6.0
+    ports:
+      - 5000:5000
+    volumes:
+      - javaApp:/log
+      - D:/projects/spring-boot-docker-compose/logstash.conf:/usr/share/logstash/elk-config/logstash.conf:ro
+    command: logstash -f /usr/share/logstash/elk-config/logstash.conf
+    depends_on:
+      - elasticsearch
