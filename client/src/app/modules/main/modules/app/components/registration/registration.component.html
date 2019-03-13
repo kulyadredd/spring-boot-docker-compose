@@ -1,0 +1,47 @@
+<div fxLayoutAlign="center center" style="margin-top: 100px;">
+    <mat-card class="example-card" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>Sing Up</mat-card-title>
+        <mat-card-content>
+            <form #registrationForm="ngForm" novalidate>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #name="ngModel"
+                           placeholder="Full Name"
+                           id="name"
+                           name="name" type="text" [(ngModel)]="registration.name">
+                    <mat-error *ngIf="name.invalid">Full Name is required</mat-error>
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>account_box</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #username="ngModel"
+                           placeholder="Username"
+                           id="username"
+                           name="username" type="text" [(ngModel)]="registration.username">
+                    <mat-error *ngIf="username.invalid">Username is required</mat-error>
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #email="ngModel"
+                           placeholder="Email"
+                           id="email"
+                           name="email" type="text" [(ngModel)]="registration.email">
+                    <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>enhanced_encryption</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #password="ngModel"
+                           placeholder="Password"
+                           id="password"
+                           name="password" type="text" [(ngModel)]="registration.password">
+                    <mat-error *ngIf="name.invalid">Password is required</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <button mat-raised-button color="primary" (click)="onSubmit()">Sing up</button>
+        <p>Already registered? <a routerLink="/login" >Login now!</a></p>
+    </mat-card>
+</div>

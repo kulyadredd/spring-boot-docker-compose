@@ -3,6 +3,10 @@
 gradle
 out
 build
+node
+node_modules
+dist
+e2e
 
 # Compiled class file
 *.class

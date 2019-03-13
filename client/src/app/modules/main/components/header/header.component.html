@@ -1,0 +1,13 @@
+<mat-toolbar class="mat-elevation-z2" color="primary">
+  <mat-toolbar-row>
+    <span routerLink="/">Docker compose app</span>
+    <span class="fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <a *ngIf="isLoggedIn() && isAdmin()" routerLink="/admin/users" mat-button>Admin panel</a>
+    <a *ngIf="isLoggedIn()" routerLink="/profile" mat-button>Profile</a>
+    <a *ngIf="!isLoggedIn()" routerLink="/login" mat-button>Login</a>
+    <a *ngIf="!isLoggedIn()" routerLink="/registration" mat-button>Sing Up</a>
+    <button *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>

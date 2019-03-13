@@ -10,7 +10,7 @@ services:
       - MYSQL_DATABASE=test
       - MYSQL_PASSWORD=root
   javaApp:
-    image: kulyadredd/spring-boot-docker-compose:0.0.1
+    image: kulyadredd/spring-boot-docker-compose:1.0
     depends_on:
       - mysql
     ports:
@@ -21,6 +21,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_PROFILES_ACTIVE=docker
+    deploy:
+      mode: replicated
+      replicas: 2
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
     ports:

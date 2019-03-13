@@ -1,0 +1,28 @@
+<div fxLayoutAlign="center center" style="margin-top: 100px;">
+    <mat-card class="example-card" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <form #loginForm="ngForm" novalidate>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>account_box</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #usernameOrEmail="ngModel"
+                           placeholder="Username or Email"
+                           id="username_or_email"
+                           name="usernameOrEmail" type="text" [(ngModel)]="credential.usernameOrEmail">
+                    <mat-error *ngIf="usernameOrEmail.invalid">Username or Email is required</mat-error>
+                </mat-form-field>
+                <mat-form-field style="width: 100%">
+                    <mat-icon matPrefix>enhanced_encryption</mat-icon>
+                    <input matInput required autocomplete="off"
+                           #password="ngModel"
+                           placeholder="Password"
+                           id="password"
+                           name="password" type="password" [(ngModel)]="credential.password">
+                    <mat-error *ngIf="password.invalid">Password</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <button mat-raised-button color="primary" (click)="onSubmit()">Login!</button>
+    </mat-card>
+</div>

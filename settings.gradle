@@ -4,3 +4,6 @@ pluginManagement {
 	}
 }
 rootProject.name = 'spring-boot-docker-compose'
+include 'client'
+include 'server'
+
